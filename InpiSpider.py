@@ -107,7 +107,7 @@ def crawl_inpi(nprot):
 
 
 #Números de proteção:
-nprot_values = read_file_to_list('/workspaces/codespaces-blank/lista_de_protecoes.txt')
+nprot_values = read_file_to_list('/workspaces/InpiSpider/lista_de_protecoes.txt')
 
 print ("Quantidade de novas proteções encontradas: ", len(nprot_values), "\n")
 print ("N° de cada proteção: ", nprot_values, "\n")
@@ -216,7 +216,7 @@ def extrator(dados, nprot):
     prote = multiplicador(prote)
     
     # Dados imutáveis
-    arquivo = "/workspaces/codespaces-blank/Novo resumos de proteções.xlsx"
+    arquivo = "/workspaces/InpiSpider/Novo resumos de proteções.xlsx"
     planilha = "SOFTWARE"
 
     coluna1 = 'INVENTOR/AUTOR'
