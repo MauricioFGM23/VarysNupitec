@@ -182,7 +182,6 @@ def extrator(dados, nprot):
         "\nTítulo: ", titulo, "\nTitular da Tecnologia: ", titular, '\n')
 
 #Execucção do Spider dos Autores no site do pesquisar
-
     lista_autores = AutorsSpider(autores_separados)
 
   # Compilador de dados dos autores
