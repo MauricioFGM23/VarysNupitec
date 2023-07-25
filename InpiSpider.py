@@ -107,7 +107,6 @@ def crawl_inpi(nprot):
 
 
 #Números de proteção:
-#nprot_values = ['BR 51 2022 003020 9']
 nprot_values = read_file_to_list('/workspaces/codespaces-blank/lista_de_protecoes.txt')
 
 print ("Quantidade de novas proteções encontradas: ", len(nprot_values), "\n")
