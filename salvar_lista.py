@@ -37,8 +37,8 @@ def salvar_lista_em_excel(lista, nome_coluna, nome_arquivo, nome_aba):
     print(f'Os elementos foram salvos com sucesso na planilha "{nome_coluna}"!')
 
 # # Definindo o nome do arquivo .xlsx e a planilha que contém os dados
-# arquivo = "Novo resumos de proteções.xlsx"
+# arquivo = "x.xlsx"
 # planilha = "SOFTWARE"
 # coluna = 'Nº DA PROTEÇÃO'
-# n_protecao = ['BR 51 2023 001737 0']
+# n_protecao = ['']
 # salvar_lista_em_excel(n_protecao, coluna, arquivo, planilha)
