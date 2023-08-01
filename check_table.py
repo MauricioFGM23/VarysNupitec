@@ -2,14 +2,16 @@ import scrapy
 from scrapy.crawler import CrawlerProcess
 import pandas as pd
 
+dados=[]
+n_prot=[]
+
 def save_list_to_file(n_prot, filename):
     with open(filename, 'w') as file:
         for item in n_prot:
             file.write(f'{item}\n')
 
 def check_table(arquivo):
-    dados=[]
-    n_prot=[]
+    
     
     class InpiSpider(scrapy.Spider):
         name = "inpi"
@@ -33,9 +35,11 @@ def check_table(arquivo):
             elementos_texto = response.css('a')
 
             for elemento in elementos_texto:
-                texto = elemento.css('::text').get()
+                texto = elemento.css('a[class="visitado"]::text').get()
                 if texto:
                     dados.append(texto.strip())
+
+            # print(dados)
 
     # Inciar CrawlerProcess
     process = CrawlerProcess()
@@ -46,28 +50,26 @@ def check_table(arquivo):
     # Iniciar o processo
     process.start()
     
-#Comparar valores com a tabela de resumo de proteções
-    # Load the Excel file
+    #print(dados)
+    
+# Comparar valores com a tabela de resumo de proteções
+    
     df = pd.read_excel(arquivo)
 
-    # Convert the column to a set for faster comparison
     excel_column_set = set(df["Nº DA PROTEÇÃO"].astype(str))
 
-    for item in dados:
-        if item not in excel_column_set:
+    for item in reversed(dados):
+        if item.strip() not in excel_column_set:
             n_prot.append(item)
-    #return n_prot
-    if len(n_prot) >= 13:  # Ensure that the list has at least 13 elements (8 + 5)
-        n_prot = n_prot[8:-5]
-    else:
-        print("A lista não tem elementos suficientes!")
-   
-    # Print the list of protocols not present in the Excel column
+    
+    #print(n_prot)
+
     return n_prot
 
-arquivo = "/workspaces/codespaces-blank/Novo resumos de proteções.xlsx"
+arquivo = "/workspaces/InpiSpider/04. Resumo de Proteções - Bruto.xlsx"
 
 n_prot = check_table(arquivo)
+
 if not n_prot:
     print("\nPlanilha Atualizada! volte outro dia!\n")
 else:

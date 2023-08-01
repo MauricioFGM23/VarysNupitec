@@ -5,10 +5,14 @@ from twisted.internet import reactor
 from twisted.internet.defer import DeferredList
 from bs4spider import AutorsSpider
 from salvar_lista import salvar_lista_em_excel
-from check_website import check_website
+from check_website import check_website, fazer_backup
+
 
 #checar se o INPI está online
 check_website("https://busca.inpi.gov.br/pePI/servlet/LoginController?action=login")
+arquivo_original = "/workspaces/InpiSpider/04. Resumo de Proteções - Bruto.xlsx"
+arquivo_backup = "/workspaces/InpiSpider/backup"
+fazer_backup(arquivo_original,arquivo_backup)
 
 #ler txt contendo os n de proteção
 def read_file_to_list(filename):
@@ -54,7 +58,7 @@ def executar_arquivo_python(arquivo):
 
 print ("Iniciando busca por proteções no INPI.\n")
 # Arquivo que você deseja executar
-nome_arquivo = '/workspaces/codespaces-blank/check_table.py'
+nome_arquivo = '/workspaces/InpiSpider/check_table.py'
 
 # Executa o arquivo e espera a finalização antes de continuar o fluxo
 executar_arquivo_python(nome_arquivo)
@@ -62,7 +66,6 @@ executar_arquivo_python(nome_arquivo)
 # Continue aqui com o fluxo do programa após a execução do arquivo .py
 print("Continuando o fluxo do programa...\n")
 
-        
 #Spider que copia os dados de cada número de proteção
 def crawl_inpi(nprot):
     dados = []
@@ -216,7 +219,7 @@ def extrator(dados, nprot):
     prote = multiplicador(prote)
     
     # Dados imutáveis
-    arquivo = "/workspaces/InpiSpider/Novo resumos de proteções.xlsx"
+    arquivo = "/workspaces/InpiSpider/04. Resumo de Proteções - Bruto.xlsx"
     planilha = "SOFTWARE"
 
     coluna1 = 'INVENTOR/AUTOR'

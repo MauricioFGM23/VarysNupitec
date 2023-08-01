@@ -1,3 +1,5 @@
+import shutil
+import openpyxl
 import requests
 from bs4 import BeautifulSoup
 
@@ -23,5 +25,16 @@ def check_website(url):
     title = soup.find('title').get_text()
     print("Título da página:", title, "\n")
 
-# start_urls = ["https://busca.inpi.gov.br/pePI/servlet/LoginController?action=login"]
-# check_website(start_urls[0])
+#fazer Back-UP
+def fazer_backup(arquivo_original, arquivo_backup):
+    # Copiar o arquivo original para o arquivo de backup
+    shutil.copy(arquivo_original, arquivo_backup)
+
+    # Verificar a integridade do arquivo original
+    try:
+        workbook = openpyxl.load_workbook(arquivo_original)
+        workbook.active  # Tentar acessar a planilha para verificar a integridade
+    except openpyxl.utils.exceptions.InvalidFileException:
+        print("Erro Crítico!!! O arquivo original foi corrompido. Acessar back-up.")
+    else:
+        print("Backup realizado com sucesso!")
