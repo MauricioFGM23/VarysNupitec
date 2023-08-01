@@ -26,4 +26,4 @@ def AutorsSpider(autores_lista):
         scrape(url, autores_lista[i])
 
   # Retornando os dados coletados
-  return dados_por_autor
+    return dados_por_autor
