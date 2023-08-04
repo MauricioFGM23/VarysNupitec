@@ -39,8 +39,6 @@ def check_table(arquivo):
                 if texto:
                     dados.append(texto.strip())
 
-            # print(dados)
-
     # Inciar CrawlerProcess
     process = CrawlerProcess()
 
@@ -49,11 +47,8 @@ def check_table(arquivo):
 
     # Iniciar o processo
     process.start()
-    
-    #print(dados)
-    
+            
 # Comparar valores com a tabela de resumo de proteções
-    
     df = pd.read_excel(arquivo)
 
     excel_column_set = set(df["Nº DA PROTEÇÃO"].astype(str))
@@ -61,8 +56,6 @@ def check_table(arquivo):
     for item in reversed(dados):
         if item.strip() not in excel_column_set:
             n_prot.append(item)
-    
-    #print(n_prot)
 
     return n_prot
 

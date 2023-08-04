@@ -19,14 +19,15 @@ def check_website(url):
 
     print("O site está acessível!")
 
-    # Exemplo adicional: Extrair o título da página usando BeautifulSoup
+# Exemplo adicional: Extrair o título da página usando BeautifulSoup
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
     title = soup.find('title').get_text()
     print("Título da página:", title, "\n")
 
-#fazer Back-UP
+#fazer Back-UP dos dados
 def fazer_backup(arquivo_original, arquivo_backup):
+    
     # Copiar o arquivo original para o arquivo de backup
     shutil.copy(arquivo_original, arquivo_backup)
 

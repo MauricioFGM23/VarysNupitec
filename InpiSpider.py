@@ -7,7 +7,6 @@ from bs4spider import AutorsSpider
 from salvar_lista import salvar_lista_em_excel
 from check_website import check_website, fazer_backup
 
-
 #checar se o INPI está online
 check_website("https://busca.inpi.gov.br/pePI/servlet/LoginController?action=login")
 arquivo_original = "/workspaces/InpiSpider/04. Resumo de Proteções - Bruto.xlsx"
@@ -63,10 +62,9 @@ nome_arquivo = '/workspaces/InpiSpider/check_table.py'
 # Executa o arquivo e espera a finalização antes de continuar o fluxo
 executar_arquivo_python(nome_arquivo)
 
-# Continue aqui com o fluxo do programa após a execução do arquivo .py
 print("Continuando o fluxo do programa...\n")
 
-#Spider que copia os dados de cada número de proteção
+#Spider principal para extração dos dados
 def crawl_inpi(nprot):
     dados = []
 
