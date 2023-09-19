@@ -3,9 +3,9 @@ import subprocess
 from scrapy.crawler import CrawlerRunner
 from twisted.internet import reactor
 from twisted.internet.defer import DeferredList
-from bs4spider import AutorsSpider
-from salvar_lista import salvar_lista_em_excel
-from check_website import check_website, fazer_backup
+from varyspatente2.VarysPatente.backup.bs4spider import AutorsSpider
+from varyspatente2.VarysPatente.backup.salvar_lista import salvar_lista_em_excel
+from varyspatente2.VarysPatente.backup.check_website import check_website, fazer_backup
 
 #checar se o INPI está online
 check_website("https://busca.inpi.gov.br/pePI/servlet/LoginController?action=login")
