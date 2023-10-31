@@ -12,11 +12,11 @@ nvigente = {'8.12':'8.12 - ARQ DEFINITIVO - FALTA DE PGT','11.1.1':'11.1.1 - ARQ
             '11.6':'11.6 - ARQ DEFINITIVO - PROCURAÇÃO','11.11':'11.11 - ARQ DEFINITIVO - ANTERIORIDADE',
             '11.21':'11.21 - ARQ DEFINITIVO - PCT','18.3':'18.3 - CADUCIDADE DEFERIDA',
             '21.1':'21.1 - EXTINÇÃO - PGT','21.2':'EXTINÇÃO - RENÚNCIA','21.7':'EXTINÇÃO - NÃO CUMPRIMENTO',
-            '21.6':'21.6 - EXTINÇAO - PGT', '11.20':'11.20 - ARQ - MANUTENÇÃO','9.2.4':'9.2.4 - MANUTENÇÃO DO INDEFERIMENTO',
+            '11.20':'11.20 - ARQ - MANUTENÇÃO','9.2.4':'9.2.4 - MANUTENÇÃO DO INDEFERIMENTO',
             '111':'111 - MANTIDO O INDEFERIMENTO DO PEDIDO','112':'112 - MANTIDO O ARQUIVAMENTO DO PEDIDO',
             '113':'113 - MANTIDO O INDEFERIMENTO DA PETIÇÃO'}
 
-vigente = {'9.1':'9.1 - DEFERIMENTO','16.1':'16.1 - CONCESSÃO DE CARTA PATENTE', '203':'203 - EXAME TÉCNICO SOLICITADO'}
+vigente = {'9.1':'9.1 - DEFERIMENTO','16.1':'16.1 - CONCESSÃO DE CARTA PATENTE','203':'203 - EXAME TÉCNICO SOLICITADO','8.6':'8.6 - FALTA DE PAGAMENTO'}
 
 analise_sub = {'16.1':'16.1 - CONCESSÃO DE CARTA PATENTE','18.3':'18.3 - CADUCIDADE DEFERIDA','21.1':'21.1 - EXTINÇÃO - PGT',
               '21.2':'EXTINÇÃO - RENÚNCIA','21.7':'EXTINÇÃO - NÃO CUMPRIMENTO','9.2':'9.2 - INDEFERIMENTO',
@@ -73,7 +73,7 @@ def exigencia(exig,nprot):
             print ('Despachos: ', despacho)
 
         try:
-            df = pd.read_excel('/workspaces/codespaces-jupyter/VarysPatente/04. Resumos de proteções.xlsx')
+            df = pd.read_excel('/workspaces/codespaces-jupyter/VarysPatente/04. Resumo de proteções.xlsx')
             print("Arquivo Excel aberto com sucesso!")
         except Exception as erro:
             print("\nDocumento corrompido: ", erro, "\n")
@@ -84,7 +84,7 @@ def exigencia(exig,nprot):
 
         else:
             print(f'\nO {prot} não foi encontrado na coluna "Nº DA PROTEÇÃO".\n')
-            df.to_excel('/workspaces/codespaces-jupyter/VarysPatente/04. Resumos de proteções.xlsx', index=False)
+            df.to_excel('/workspaces/codespaces-jupyter/VarysPatente/04. Resumo de proteções.xlsx', index=False)
             break
 
         df.at[linha, 'DESPACHO'] = despacho
@@ -97,7 +97,7 @@ def exigencia(exig,nprot):
             df.at[linha, 'STATUS'] = 'NÃO VIGENTE'
             print(f'O pedido {prot} está NÃO VIGENTE!\n')
 
-        df.to_excel('/workspaces/codespaces-jupyter/VarysPatente/04. Resumos de proteções.xlsx', index=False)
+        df.to_excel('/workspaces/codespaces-jupyter/VarysPatente/04. Resumo de proteções.xlsx', index=False)
 
 def extract(prot):
     dados = []
@@ -125,7 +125,6 @@ def extract(prot):
                     callback=self.parse_patent_details,
                 )
             
-
         def parse_patent_details(self, response):
             next_page_link = response.css('a[class="visitado"]::attr(href)').get()
             
@@ -156,7 +155,6 @@ for prot in nprot:
     deferred, result = extract(prot)
     deferreds.append(deferred)
     results.append(result)
-    
 
 dlist = DeferredList(deferreds)
 dlist.addBoth(lambda _: reactor.stop())
