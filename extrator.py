@@ -16,7 +16,7 @@ nvigente = {'8.12':'8.12 - ARQ DEFINITIVO - FALTA DE PGT','11.1.1':'11.1.1 - ARQ
             '111':'111 - MANTIDO O INDEFERIMENTO DO PEDIDO','112':'112 - MANTIDO O ARQUIVAMENTO DO PEDIDO',
             '113':'113 - MANTIDO O INDEFERIMENTO DA PETIÇÃO'}
 
-vigente = {'9.1':'9.1 - DEFERIMENTO','16.1':'16.1 - CONCESSÃO DE CARTA PATENTE','203':'203 - EXAME TÉCNICO SOLICITADO','8.6':'8.6 - FALTA DE PAGAMENTO'}
+vigente = {'9.1':'9.1 - DEFERIMENTO','16.1':'16.1 - CONCESSÃO DE CARTA PATENTE','203':'203 - EXAME TÉCNICO SOLICITADO','8.6':'8.6 - FALTA DE PAGAMENTO', '204':'204 - PEDIDO DE EXAME DE MU'}
 
 analise_sub = {'16.1':'16.1 - CONCESSÃO DE CARTA PATENTE','18.3':'18.3 - CADUCIDADE DEFERIDA','21.1':'21.1 - EXTINÇÃO - PGT',
               '21.2':'EXTINÇÃO - RENÚNCIA','21.7':'EXTINÇÃO - NÃO CUMPRIMENTO','9.2':'9.2 - INDEFERIMENTO',
@@ -56,8 +56,9 @@ def exigencia(exig,nprot):
         else:
             status = 1
 
-        if '203 - EXAME TÉCNICO SOLICITADO' not in exig_vig:
+        if '203 - EXAME TÉCNICO SOLICITADO' not in exig_vig or '204 - PEDIDO DE EXAME DE MU' not in exig_vig:
             exig_ansu.append('- EXAME TÉCNICO AUSENTE!!! -')
+            
 
         despacho = exig_nvig
         for item in exig_vig:
@@ -106,12 +107,12 @@ def extract(prot):
         name = "inpi"
         start_urls = ["https://busca.inpi.gov.br/pePI/servlet/LoginController?action=login"]
         custom_settings = {
-        'DOWNLOAD_DELAY': 2,
+        'DOWNLOAD_DELAY': 5,
         'AUTOTHROTTLE_ENABLED': True,
-        'AUTOTHROTTLE_START_DELAY': 5.0,
+        'AUTOTHROTTLE_START_DELAY': 1.0,
         'AUTOTHROTTLE_MAX_DELAY': 60.0,
-        'AUTOTHROTTLE_TARGET_CONCURRENCY': 1.0,        
-         }
+        'AUTOTHROTTLE_TARGET_CONCURRENCY': 10.0,
+        }
         
         def parse(self, response):
             next_page_link = response.css('area[data-mce-href="menu-servicos/patente"]::attr(href)').get()
@@ -149,7 +150,7 @@ with open('/workspaces/codespaces-jupyter/VarysPatente/lista_prot.txt', 'r') as 
     nprot = [x.strip() for x in nprot]
 
 #TESTES:
-# nprot = ['BR 10 2012 021044 4']
+#nprot = ['BR 10 2012 021044 4']
 
 for prot in nprot:
     deferred, result = extract(prot)
