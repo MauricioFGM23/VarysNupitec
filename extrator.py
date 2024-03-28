@@ -85,7 +85,7 @@ def exigencia(exig,nprot):
 
         else:
             print(f'\nO {prot} não foi encontrado na coluna "Nº DA PROTEÇÃO".\n')
-            df.to_excel('/workspaces/codespaces-jupyter/VarysPatente/04. Resumo de proteções.xlsx', index=False)
+            df.to_excel('$HOME/VarysNupitec/04. Resumo de proteções.xlsx', index=False)
             break
 
         df.at[linha, 'DESPACHO'] = despacho
@@ -98,7 +98,7 @@ def exigencia(exig,nprot):
             df.at[linha, 'STATUS'] = 'NÃO VIGENTE'
             print(f'O pedido {prot} está NÃO VIGENTE!\n')
 
-        df.to_excel('/workspaces/codespaces-jupyter/VarysPatente/04. Resumo de proteções.xlsx', index=False)
+        df.to_excel('$HOME/VarysNupitec/04. Resumo de proteções.xlsx', index=False)
 
 def extract(prot):
     dados = []
@@ -145,7 +145,7 @@ def extract(prot):
 
     return deferred, dados
 
-with open('/workspaces/codespaces-jupyter/VarysPatente/lista_prot.txt', 'r') as f:
+with open('$HOME/VarysNupitec/lista_prot.txt', 'r') as f:
     nprot = f.readlines()
     nprot = [x.strip() for x in nprot]
 
