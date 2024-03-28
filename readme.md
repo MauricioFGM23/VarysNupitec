@@ -39,7 +39,7 @@ Execução do `extrator.py`: O extrator que faz a comparação e joga os dados e
 Por exemplo, em: 
 
 ```python
-df = pd.read_excel('$HOME/VaryNupitec/04. Resumo de proteções.xlsx')
+df = pd.read_excel('/path/to/user/VaryNupitec/04. Resumo de proteções.xlsx')
 ```
 
 ### Execução do programa
