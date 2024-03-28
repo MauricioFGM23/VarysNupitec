@@ -103,8 +103,8 @@ else:
     print ("\nQuantidade de novas proteções: ", len(n_prot))
     print("Proteções Identificadas: ",n_prot, "\n")
 
-save_list_to_file(n_prot, '/workspaces/codespaces-jupyter/VarysPatente/lista_prot.txt')
+save_list_to_file(n_prot, '$HOME/VarysNupitec/lista_prot.txt')
 
-arquivo_entrada = "/workspaces/codespaces-jupyter/VarysPatente/lista_prot.txt"
-arquivo_saida = "/workspaces/codespaces-jupyter/VarysPatente/lista_prot.txt"
+arquivo_entrada = "$HOME/VarysNupitec/lista_prot.txt"
+arquivo_saida = "$HOME/VarysNupitec/lista_prot.txt"
 subs(arquivo_entrada, arquivo_saida)
