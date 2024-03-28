@@ -74,7 +74,7 @@ def exigencia(exig,nprot):
             print ('Despachos: ', despacho)
 
         try:
-            df = pd.read_excel('/workspaces/codespaces-jupyter/VarysPatente/04. Resumo de proteções.xlsx')
+            df = pd.read_excel('$HOME/VarysNupitec/04. Resumo de proteções.xlsx')
             print("Arquivo Excel aberto com sucesso!")
         except Exception as erro:
             print("\nDocumento corrompido: ", erro, "\n")
