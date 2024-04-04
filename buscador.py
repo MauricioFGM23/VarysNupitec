@@ -1,3 +1,4 @@
+import os 
 import scrapy
 from scrapy.crawler import CrawlerProcess
 
@@ -103,8 +104,13 @@ else:
     print ("\nQuantidade de novas proteções: ", len(n_prot))
     print("Proteções Identificadas: ",n_prot, "\n")
 
-save_list_to_file(n_prot, '/workspaces/codespaces-jupyter/VarysPatente/lista_prot.txt')
 
-arquivo_entrada = "/workspaces/codespaces-jupyter/VarysPatente/lista_prot.txt"
-arquivo_saida = "/workspaces/codespaces-jupyter/VarysPatente/lista_prot.txt"
+dir_path = os.path.dirname(os.path.realpath(__file__))
+lista_prot = os.path.join(dir_path, 'lista_prot.txt')
+            
+save_list_to_file(n_prot, lista_prot)
+            
+arquivo_entrada = lista_prot
+arquivo_saida = lista_prot
+
 subs(arquivo_entrada, arquivo_saida)
