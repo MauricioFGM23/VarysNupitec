@@ -23,6 +23,10 @@ analise_sub = {'16.1':'16.1 - CONCESSÃO DE CARTA PATENTE','18.3':'18.3 - CADUCI
               '21.2':'EXTINÇÃO - RENÚNCIA','21.7':'EXTINÇÃO - NÃO CUMPRIMENTO','9.2':'9.2 - INDEFERIMENTO',
               '9.2.4':'9.2.4 - MANUTENÇÃO DO INDEFERIMENTO'}
 
+dir_path = os.path.dirname(os.path.realpath(__file__))
+planilha = os.path.join(dir_path, '04. Resumo de proteções.xlsx')
+lista_prot = os.path.join(dir_path, 'lista_prot.txt')
+
 def exigencia(exig,nprot):
 
     exig_nvig = []
@@ -75,7 +79,7 @@ def exigencia(exig,nprot):
             print ('Despachos: ', despacho)
 
         try:
-            df = pd.read_excel(os.path.expanduser("~/VarysNupitec/04. Resumo de proteções.xlsx"))
+            df = pd.read_excel(planilha)
             print("Arquivo Excel aberto com sucesso!")
         except Exception as erro:
             print("\nDocumento corrompido: ", erro, "\n")
@@ -86,7 +90,7 @@ def exigencia(exig,nprot):
 
         else:
             print(f'\nO {prot} não foi encontrado na coluna "Nº DA PROTEÇÃO".\n')
-            df.to_excel(os.path.expanduser("~/VarysNupitec/04. Resumo de proteções.xlsx"), index=False)
+            df.to_excel(planilha, index=False)
             break
 
         df.at[linha, 'DESPACHO'] = despacho
@@ -99,7 +103,7 @@ def exigencia(exig,nprot):
             df.at[linha, 'STATUS'] = 'NÃO VIGENTE'
             print(f'O pedido {prot} está NÃO VIGENTE!\n')
 
-        df.to_excel(os.path.expanduser("~/VarysNupitec/04. Resumo de proteções.xlsx"), index=False)
+        df.to_excel(planilha, index=False)
 
 def extract(prot):
     dados = []
@@ -146,7 +150,7 @@ def extract(prot):
 
     return deferred, dados
 
-with open(os.path.expanduser("~/VarysNupitec/lista_prot.txt"), 'r') as f:
+with open(lista_prot, 'r') as f:
     nprot = f.readlines()
     nprot = [x.strip() for x in nprot]
 

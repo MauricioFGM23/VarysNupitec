@@ -12,6 +12,7 @@ sudo apt-get upgrade
 ```bash
 pip install scrapy
 pip install pandas
+pip install openpyxl
 ```
 
 ## Utilização
